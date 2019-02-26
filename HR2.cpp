@@ -1,7 +1,7 @@
 /*
 
  HR2.C
- V1.03
+ V1.04
  (Changes: meb)
 
  A program to calculate elemental compositions for a given mass.
@@ -47,6 +47,7 @@
 						'nadd' and 'charge' by calculating 'nadd' from 'charge' using abscharge = abs(charge)
 						(did it manually because I couldn't find 'abs') to correct 'measured_mass' and limits, 
 						but keeping nadd = 0 for rdb calculation of neutral MW (MB)
+			2014-08-29, Marion Landi corrected the mass of atoms.
 
  This is ANSI C and should compile with any C compiler; use
  something along the lines of "gcc -Wall -O3 -o hr hr.c".
@@ -105,27 +106,27 @@ Element el[]=
    dle: isoptopes are given by iC for 13C, iK for 41K etc....
 */
 {
-{ "C", "C",  12.000000000,   +2.0, 'C', 0, 41, 0,0 },
+{ "C", "C",  12.000000000,   +2.0, 'C', 0, 100, 0,0 },
 { "iC", "C", 13.0033548378, +2.0, '1', 0, 0, 0 ,0 },
-{ "H",  "H",   1.0078250321,  -1.0, 'H', 0, 72, 0 ,0},
+{ "H",  "H",   1.0078250321,  -1.0, 'H', 0, 200, 0 ,0},
 { "iH", "H",   2.0141017780,  -1.0, 'D', 0, 0, 0 ,0},
-{ "N",  "N",  14.0030740052,  +1.0, 'N', 0, 15, 0,0 },		//org +1 = valence = 3: now +3 for valence = 5
+{ "N",  "N",  14.0030740052,  +1.0, 'N', 0, 40, 0,0 },          //org +1 = valence = 3: now +3 for valence = 5
 { "iN",  "N",  15.0001088984,   +1.0, 'M', 0, 0, 0,0 },
-{ "O",  "O",  15.9949146221,   0.0, 'O', 0, 30, 0 ,0},
-{ "F", "F",  18.99840320,    -1.0, 'F', 0, 0, 0 ,0},
-{ "Na", "Na", 22.98976967,    -1.0, 'A', 0, 0, 0 ,0},
-{ "Si", "Si", 27.9769265327,  +2.0, 'I', 0, 0, 0 ,0},	
-{ "P", "P",  30.97376151,    +3.0, 'P', 0, 2, 0 ,0},		//org +1 valence = 3: now +3 for valence = 5
-{ "S", "S",  31.97207069,    +4.0, 'S', 0, 2, 0 ,0},		//org 0 = valence = 2; now +4 for valence = 6
-{ "Cl", "Cl", 34.96885271,    -1.0, 'L', 0, 0, 0 ,0},
-{ "iCl", "Cl", 36.965896,    -1.0, 'E', 0, 0, 0 ,0},	// added dle
-{ "Br", "Br", 78.9183376,     -1.0, 'B', 0, 0, 0 ,0},	
-{ "iBr", "Br", 80.916344, -1.0, 'G', 0, 0, 0 ,0},	   // added dle
-{ "K", "K", 38.9637069,    -1.0, 'K', 0, 0, 0 ,0},     	// added dle
-{ "iK", "K", 40.9618259,    -1.0, 'J', 0, 0, 0 ,0},    	// added dle
+{ "O",  "O",  15.9949146221,   0.0, 'O', 0, 70, 0 ,0},
+{ "F", "F",  18.99840322,    -1.0, 'F', 0, 0, 0 ,0},
+{ "Na", "Na", 22.98976928,    -1.0, 'A', 0, 0, 0 ,0},
+{ "Si", "Si", 27.9769265327,  +2.0, 'I', 0, 0, 0 ,0},
+{ "P", "P",  30.97376163,    +3.0, 'P', 0, 10, 0 ,0},            //org +1 valence = 3: now +3 for valence = 5
+{ "S", "S",  31.97207069,    +4.0, 'S', 0, 0, 0 ,0},            //org 0 = valence = 2; now +4 for valence = 6
+{ "Cl", "Cl", 34.96885268,    -1.0, 'L', 0, 0, 0 ,0},
+{ "iCl", "Cl", 36.96590259,    -1.0, 'E', 0, 0, 0 ,0},  // added dle
+{ "Br", "Br", 78.9183371,     -1.0, 'B', 0, 0, 0 ,0},
+{ "iBr", "Br", 80.9162906, -1.0, 'G', 0, 0, 0 ,0},         // added dle
+{ "K", "K", 38.96370668,    -1.0, 'K', 0, 0, 0 ,0},             // added dle
+{ "iK", "K", 40.96182576,    -1.0, 'J', 0, 0, 0 ,0},            // added dle
 };
 
-const double electron = 0.0005484;	/* mass of the electron in amu */
+const double electron = 0.0005486;
 
 
 /* --- global variables --- */
